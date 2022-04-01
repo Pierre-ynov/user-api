@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IUserDao extends MongoRepository<User, Integer> {
+public interface IUserDao extends MongoRepository<User, String> {
 	@Query("{accountStatus : ACTIVE}")
 	List<User> findAllActiveUsers ();
 	
 	@Query("{id : ?0}")
-	User findUserByID (Integer id);
+	User findUserByID (String id);
 }
