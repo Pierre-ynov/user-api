@@ -14,7 +14,17 @@ public class JsonNodeUtil {
 		return res;
 	}
 	
-	public static Boolean getJsonNodeAsBoolean (ObjectNode json, String filter) {
+	public static Status getJsonNodeAsStatus (ObjectNode json, String filter) {
+		String tmp = getJsonNodeAsText(json, filter);
+		try {
+			return Status.valueOf(tmp);
+		} catch (RuntimeException e) {
+			System.err.println(e.getMessage());
+			return null;
+		}
+	}
+	
+/*	public static Boolean getJsonNodeAsBoolean (ObjectNode json, String filter) {
 		Boolean  res  = null;
 		JsonNode node = json.get(filter);
 		if (node != null) {
@@ -30,15 +40,5 @@ public class JsonNodeUtil {
 			res = node.asInt();
 		}
 		return res;
-	}
-	
-	public static Status getJsonNodeAsStatus (ObjectNode json, String filter) {
-		String tmp = getJsonNodeAsText(json, filter);
-		try {
-			return Status.valueOf(tmp);
-		} catch (RuntimeException e) {
-			System.err.println(e.getMessage());
-			return null;
-		}
-	}
+	}*/
 }

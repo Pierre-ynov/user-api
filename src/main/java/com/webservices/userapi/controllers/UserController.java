@@ -26,7 +26,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/{id}")
-	public ResponseEntity<User> getUserById (@PathVariable Integer id) {
+	public ResponseEntity<User> getUserById (@PathVariable String id) {
 		return ResponseEntity.ok(userDao.findUserByID(id));
 	}
 	
@@ -37,14 +37,14 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/update/{id}")
-	public ResponseEntity<User> updateUser (@RequestBody ObjectNode jsonUser, @PathVariable Integer id) {
+	public ResponseEntity<User> updateUser (@RequestBody ObjectNode jsonUser, @PathVariable String id) {
 		User newUser = new User(jsonUser);
 		newUser.setId(id);
 		return ResponseEntity.ok(userDao.save(newUser));
 	}
 	
 	@DeleteMapping("/user/delete/{id}")
-	public ResponseEntity<?> deleteUserById (@PathVariable Integer id) {
+	public ResponseEntity<?> deleteUserById (@PathVariable String id) {
 		userDao.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
