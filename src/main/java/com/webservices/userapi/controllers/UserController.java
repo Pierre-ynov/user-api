@@ -41,6 +41,7 @@ public class UserController { // TODO : Gérer les responses autres que 200
 		User user = getUserById(id).getBody();
 		assert user != null;
 		user.updateUser(jsonUser);
+		user.setId(id);
 		return ResponseEntity.ok(userDao.save(user));
 	}
 	
