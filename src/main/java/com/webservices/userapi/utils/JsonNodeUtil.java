@@ -23,22 +23,4 @@ public class JsonNodeUtil {
 			return null;
 		}
 	}
-	
-/*	public static Boolean getJsonNodeAsBoolean (ObjectNode json, String filter) {
-		Boolean  res  = null;
-		JsonNode node = json.get(filter);
-		if (node != null) {
-			res = node.asBoolean();
-		}
-		return res;
-	}
-	
-	public static Integer getJsonNodeAsInteger (ObjectNode json, String filter) {
-		Integer  res  = null;
-		JsonNode node = json.get(filter);
-		if (node != null) {
-			res = node.asInt();
-		}
-		return res;
-	}*/
 }

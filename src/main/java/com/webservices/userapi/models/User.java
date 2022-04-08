@@ -50,7 +50,7 @@ public class User {
 	}
 	
 	public User deleteUser () {
-		this.setAccountStatus(Status.SUSPENDED);
+		this.setAccountStatus(Status.DELETED);
 		return this;
 	}
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class UserController { // TODO : Gérer les responses autres que 200
+public class UserController {
 	
 	@Autowired
 	IUserDao userDao;
@@ -41,6 +41,7 @@ public class UserController { // TODO : Gérer les responses autres que 200
 		User user = getUserById(id).getBody();
 		assert user != null;
 		user.updateUser(jsonUser);
+		user.setId(id);
 		return ResponseEntity.ok(userDao.save(user));
 	}
 	
@@ -48,8 +49,7 @@ public class UserController { // TODO : Gérer les responses autres que 200
 	public ResponseEntity<?> deleteUserById (@PathVariable String id) {
 		User user = getUserById(id).getBody();
 		assert user != null;
-		user.deleteUser();
-		userDao.save(user);
-		return ResponseEntity.noContent().build();
+		userDao.save(user.deleteUser());
+		return ResponseEntity.ok("L'utilisateur a bien été \"supprimé\"");
 	}
 }
