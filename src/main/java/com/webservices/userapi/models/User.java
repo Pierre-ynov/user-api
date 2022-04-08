@@ -35,4 +35,22 @@ public class User {
 		country = JsonNodeUtil.getJsonNodeAsText(json, "country");
 		accountStatus = JsonNodeUtil.getJsonNodeAsStatus(json, "accountStatus");
 	}
+	
+	public User updateUser (ObjectNode json) {
+		if (json.has("username")) {
+			this.setUsername(JsonNodeUtil.getJsonNodeAsText(json, "username"));
+		}
+		if (json.has("country")) {
+			this.setCountry(JsonNodeUtil.getJsonNodeAsText(json, "country"));
+		}
+		if (json.has("accountStatus")) {
+			this.setAccountStatus(JsonNodeUtil.getJsonNodeAsStatus(json, "accountStatus"));
+		}
+		return this;
+	}
+	
+	public User deleteUser () {
+		this.setAccountStatus(Status.SUSPENDED);
+		return this;
+	}
 }

@@ -38,14 +38,18 @@ public class UserController { // TODO : Gérer les responses autres que 200
 	
 	@PostMapping("/user/update/{id}")
 	public ResponseEntity<User> updateUser (@RequestBody ObjectNode jsonUser, @PathVariable String id) {
-		User newUser = new User(jsonUser);
-		newUser.setId(id);
-		return ResponseEntity.ok(userDao.save(newUser));
+		User user = getUserById(id).getBody();
+		assert user != null;
+		user.updateUser(jsonUser);
+		return ResponseEntity.ok(userDao.save(user));
 	}
 	
 	@DeleteMapping("/user/delete/{id}")
 	public ResponseEntity<?> deleteUserById (@PathVariable String id) {
-		userDao.deleteById(id);
+		User user = getUserById(id).getBody();
+		assert user != null;
+		user.deleteUser();
+		userDao.save(user);
 		return ResponseEntity.noContent().build();
 	}
 }
